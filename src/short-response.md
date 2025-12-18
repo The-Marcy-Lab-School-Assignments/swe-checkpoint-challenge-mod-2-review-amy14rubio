@@ -15,12 +15,12 @@ For example, a `Notification` and an `EmailNotification` have an inheritance rel
 
 ### Response 1
 
-1. Your response...
-2. Your response...
-3. Your response...
-4. Your response...
-5. Your response...
-6. Your response...
+1. Composition
+2. Inheritance
+3. Composition
+4. Inheritance
+5. Composition
+6. Inheritance
 
 ---
 
@@ -34,9 +34,9 @@ b) In the `Library` class from Problem 2, the `books` and `checkedOut` arrays ar
 
 ### Response 2
 
-a) Your response...
+a) The purpose of making a property private is that it ensures that the developer doesn't **accidentally mutate** the private property and **break the system**. Private properties are used to enforce **encapsulation**, enforce **invariants** and overall to **reduce bugs**.
 
-b) Your response...
+b) This design choice makes sense because the `name` property **is not mutated** throughout the `Library` class while the `books` and `checkedOut` properties are mutated and therefore need **protection through the encapsulation of private properties**.
 
 ---
 
@@ -80,12 +80,33 @@ c) Explain why the `withdraw` method in the original code has a logic flaw, and 
 
 ### Response 3
 
-a) Your response...
+a) The `balance` and `transactions` properties should be made private. This is because these properties are **mutated** throughout the `deposit` and `withdraw` methods and **should not be easily accessed** outside of the `BankAccount` class. These properties need protection to **prevent outside interference** as shown with: `account.balance = 1000000` and `account.transactions = []`.
 
-b) Your rewritten class...
+b) 
 
 ```js
-// Write your fixed BankAccount class here
+class BankAccount {
+  #balance
+  #transactions = []
+  constructor(ownerName, initialBalance) {
+    this.ownerName = ownerName;
+    this.#balance = initialBalance;
+  }
+
+  deposit(amount) {
+    this.#balance += amount;
+    this.#transactions.push({ type: 'deposit', amount });
+  }
+
+  withdraw(amount) {
+    if (this.#balance - amount <= 0){
+      console.log(`Error ${amount} cannot be withdrawn`)
+      return
+    }
+    this.#balance -= amount;
+    this.#transactions.push({ type: 'withdrawal', amount });
+  }
+}
 ```
 
-c) Your response...
+c) The flaw in the `withdraw` method is that the user can **withdraw an amount that they do not have in their balance**. In other words, there is **no limit** to the amount the user can withdraw.

@@ -1,0 +1,20 @@
+{
+  "name": "swe-assignment-2.5-3-classes-v2",
+  "version": "1.0.0",
+  "description": "Classes assignment - Inheritance, Polymorphism, and Composition",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "classes",
+    "inheritance",
+    "polymorphism",
+    "composition"
+  ],
+  "author": "Marcy Lab School",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
